@@ -7,10 +7,22 @@ from library_exam.user_profile.models import Profile
 
 def home(request):
     profile_user = Profile.objects.first()
-    if not profile_user:
-        return redirect("register")
     books = Book.objects.all()
-    context = {"profile_user": profile_user, "books": books}
+
+    rows = []
+    per_row = 3
+
+    for i in range(0, len(books), per_row):
+        current_row = books[i : i + per_row]
+        rows.append(current_row)
+
+    if not profile_user:
+        return redirect("create-profile")
+
+    context = {
+        "profile_user": profile_user,
+        "rows": rows,
+    }
     return render(request, "user_profile/home-with-profile.html", context)
 
 
