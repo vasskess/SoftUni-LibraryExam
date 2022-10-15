@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from library_exam.book.forms import BookForm
 from library_exam.book.models import Book
 from library_exam.user_profile.models import Profile
+
 profile_user = Profile.objects.first()
 
 
