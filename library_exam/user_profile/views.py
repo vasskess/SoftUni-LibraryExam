@@ -17,7 +17,7 @@ def home(request):
         rows.append(current_row)
 
     if not profile_user:
-        return redirect("create-profile")
+        return redirect("register")
 
     context = {
         "profile_user": profile_user,

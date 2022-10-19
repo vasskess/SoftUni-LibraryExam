@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-
+from django import forms
 from library_exam.book.models import Book
 
 
@@ -7,3 +7,9 @@ class BookForm(ModelForm):
     class Meta:
         model = Book
         fields = "__all__"
+        widgets = {
+            "title": forms.TextInput({"placeholder": "Title"}),
+            "description": forms.Textarea({"placeholder": "Description"}),
+            "image": forms.URLInput({"placeholder": "Image"}),
+            "type": forms.TextInput({"placeholder": "Fiction, Novel, Crime..."}),
+        }

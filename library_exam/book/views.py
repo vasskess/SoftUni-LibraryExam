@@ -32,7 +32,7 @@ def edit_book(request, pk):
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
-            return redirect("home_page")
+            return redirect("book_details", pk)
     context = {"book": book, "form": form, "profile_user": profile_user}
     return render(request, "book/edit-book.html", context)
 
