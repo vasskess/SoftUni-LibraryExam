@@ -2,7 +2,7 @@
 {% block content %}
     <!-- No Profile Page -->
     <section id="register-page" class="register">
-        <form id="register-form" action="" method="POST">
+        <form id="register-form" action="{% url "register" %}" method="POST">
             {% csrf_token %}
             <fieldset>
                 <legend>Profile Form</legend>

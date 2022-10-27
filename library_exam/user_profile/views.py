@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 
 from library_exam.book.models import Book
-from library_exam.user_profile.forms import ProfileForm, DeleteProfileForm
+from library_exam.user_profile.forms import (
+    CreateProfileForm,
+    EditProfileForm,
+    DeleteProfileForm,
+)
 from library_exam.user_profile.models import Profile
 
 
@@ -27,9 +31,9 @@ def home(request):
 
 
 def register(request):
-    form = ProfileForm()
+    form = CreateProfileForm()
     if request.method == "POST":
-        form = ProfileForm(request.POST)
+        form = CreateProfileForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("home_page")
@@ -46,9 +50,9 @@ def profile_page(request):
 
 def edit_profile(request):
     profile_user = Profile.objects.first()
-    form = ProfileForm(instance=profile_user)
+    form = EditProfileForm(instance=profile_user)
     if request.method == "POST":
-        form = ProfileForm(request.POST, instance=profile_user)
+        form = EditProfileForm(request.POST, instance=profile_user)
         if form.is_valid():
             form.save()
             return redirect("profile_page")
@@ -61,8 +65,9 @@ def delete_profile(request):
     form = DeleteProfileForm(instance=profile_user)
     books = Book.objects.all()
     if request.method == "POST":
-        profile_user.delete()
-        books.delete()
-        return redirect("home_page")
+        form = DeleteProfileForm(request.POST, instance=profile_user)
+        if form.is_valid():
+            form.save()
+            return redirect("home_page")
     context = {"profile_user": profile_user, "form": form}
     return render(request, "user_profile/delete-profile.html", context)

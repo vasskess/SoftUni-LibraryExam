@@ -6,7 +6,7 @@
             <h3>{{ profile_user }}</h3>
             <p class="img"><img
                     src="{{ profile_user.image_url }}"
-                    alt="https://thumbs.dreamstime.com/b/profile-picture-vector-perfect-social-media-other-web-use-125320533.jpg">
+                    alt="{{ profile_user }}">
             </p>
             <div class="actions">
                 <a class="button" href="{% url "edit_profile" %}">Edit</a>
