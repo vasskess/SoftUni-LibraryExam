@@ -17,7 +17,6 @@ class BaseProfileForm(ModelForm):
         }
 
 
-
 class CreateProfileForm(BaseProfileForm):
     pass
 
