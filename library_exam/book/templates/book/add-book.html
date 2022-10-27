@@ -3,7 +3,7 @@
 
     <!-- Add Book Page -->
     <section id="create-page" class="create">
-        <form id="create-form" action="" method="POST">
+        <form id="create-form" action="{% url "add_book" %}" method="POST">
             {% csrf_token %}
             <fieldset>
                 <legend>Add New Book</legend>

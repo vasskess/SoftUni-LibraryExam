@@ -6,7 +6,7 @@
             <h3>{{ book.title }} </h3>
             <p class="type">Type: {{ book.type }}</p>
             <p class="img"><img src="{{ book.image }}"
-                                alt="https://images-na.ssl-images-amazon.com/images/I/81Z-yHX8OcL.jpg"></p>
+                                alt="{{ book.title }}"></p>
             <div class="actions">
                 <a class="button" href="{% url "edit_book" book.pk %}">Edit</a>
                 <a class="button" href="{% url "delete_book" book.id %}">Delete</a>

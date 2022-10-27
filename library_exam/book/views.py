@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from library_exam.book.forms import BookForm
+from library_exam.book.forms import CreateBookForm, EditBookForm, DeleteBookForm
 from library_exam.book.models import Book
 from library_exam.user_profile.models import Profile
 
@@ -8,9 +8,9 @@ profile_user = Profile.objects.first()
 
 
 def add_book(request):
-    form = BookForm()
+    form = CreateBookForm()
     if request.method == "POST":
-        form = BookForm(request.POST)
+        form = CreateBookForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("home_page")
@@ -26,10 +26,10 @@ def book_details(request, pk):
 
 def edit_book(request, pk):
     book = Book.objects.get(pk=pk)
-    form = BookForm(instance=book)
+    form = EditBookForm(instance=book)
 
     if request.method == "POST":
-        form = BookForm(request.POST, instance=book)
+        form = EditBookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
             return redirect("book_details", pk)
@@ -39,5 +39,6 @@ def edit_book(request, pk):
 
 def delete_book(request, pk):
     book = Book.objects.get(pk=pk)
-    book.delete()
+    form = DeleteBookForm(instance=book)
+    form.save()
     return redirect("home_page")
